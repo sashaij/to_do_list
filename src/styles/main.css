@@ -1,0 +1,62 @@
+:root {
+    --clr-primary: rgb(85, 125, 255);
+    --clr-light: #f4f4f4;
+    --clr-dark: #333;
+    --clr-warning: rgb(99, 36, 36);
+}
+
+/* *,
+*::before,
+*::after {
+    font-family: inherit;
+    box-sizing: border-box;
+} */
+
+
+body {
+    margin: 0;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    /* margin-left: 5%; */
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 3fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "title title title title"
+    ". lists task task"
+    ". lists task task"
+    ". lists task task";
+    justify-items: center;
+   
+}
+
+.list-button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    font-size: 2rem;
+}
+
+.list-item {
+    width: 200px;
+    height: 100px;
+}
+
+#app-title {
+    grid-area: title;
+}
+
+#lists-bar {
+    grid-area: lists;
+}
+
+#tasks {
+    grid-area: task;
+}
+
+
