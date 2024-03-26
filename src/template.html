@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <script defer src="./bundle.js"></script>
+</head>
+<body>
+<h1 id="app-title">To Do App</h1>
+<div id="lists-bar">
+    <h2 id="lists-title">Task lists</h2>
+    <ul id="lists">
+
+    </ul>
+
+    <form action="">
+        <input type="text" class="new-list" placeholder="new list" aria-label="new list">
+        <button id="new-list-button" type="submit">+</button>
+    </form>
+</div>
+<div id="tasks">
+    <div id="tasks-header">
+        <h2 id="list-title">One</h2>
+        <p id="task-count">3 tasks remaining</p>
+    </div>
+    <div id="tasks-body">
+        <div id="tasks-list">
+            <div class="task">
+                <input type="checkbox" id="task-1">
+                <label for="task-1">
+                    Do one thing
+                </label>
+            </div>
+        </div>
+        <div id="new-task-form">
+            <form action="">
+                <input type="text" class="new-task" placeholder="new task" aria-label="new task">
+                <div id="priority-container">
+                    <div id="priority-title">
+                        Priority
+                    </div>
+                    <div id="priority-input">
+                        <input type="radio" name="priority" value="high" id="prior-ch-high"/>
+                        <label for="prior-ch-high">High</label>
+                        <input type="radio" name="priority" value="low" id="prior-ch-low"/>
+                        <label for="prior-ch-low">Low</label>
+                    </div>
+
+                </div>
+                <div id="date-container">
+                    <label for="due-date-input">Complete due date: </label>
+                    <input type="date" id="due-date-input" name="do-due-date" min='2024-03-13'/>
+                </div>
+                <div id="description-container">
+                    <label for="description-input">Description: </label>
+                    <input type="text" maxlength="120" id="description-input">
+                </div>
+                <button type="submit" id="new-task-button">+</button>
+            </form>
+        </div>
+        <div id="delete-task">
+            <button class="btn delete">
+                Hide completed tasks
+            </button>
+            <button class="btn delete">
+                Delete list
+            </button>
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>
