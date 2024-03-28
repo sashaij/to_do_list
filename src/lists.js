@@ -1,4 +1,6 @@
 
+import { Task } from "./tasks";
+
 
 //class for item lists
 export class List {
