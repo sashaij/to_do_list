@@ -151,3 +151,185 @@ export class List {
 
     }
 }
+
+
+
+export class listsList {
+    constructor(){
+        const listButtons = document.querySelectorAll('.list-button');
+        for (let i = 0; i <= listButtons.length; i++) {
+            listButtons[i].addEventListener('click', console.log('click'))
+        }
+        const addListButton = document.getElementById('new-list-button');
+        this._eraseAllListsContent();
+        this._renderAllLists();
+        addListButton.addEventListener('click', this._newList.bind(this));
+        //addListButton.addEventListener('click', this._renderList.bind(this));
+        addListButton.addEventListener('click', this._eraseAllListsContent);
+        addListButton.addEventListener('click', this._setIndex.bind(this));
+        addListButton.addEventListener('click', this._renderAllLists.bind(this));
+        addListButton.addEventListener('click', this._emptyForm.bind(this));
+    }
+    lists = [
+        {
+            title: 'list one',
+            index: 0,
+            tasks: [
+                {
+                    title: 'Some task 1',
+                    dueDate: '2024-03-28',
+                    priority: 'High',
+                    index: 1,
+                    description: 'Important stuff',
+                },
+                {
+                    title: 'Some task 2',
+                    dueDate: '2024-03-27',
+                    priority: 'Low',
+                    index: 1,
+                    description: 'Very important stuff',
+                },
+            ]
+        
+        },
+        {
+            title: 'list two',
+            index: 1,
+            tasks: [
+                {
+                    title: 'Some task 1',
+                    dueDate: '2024-03-28',
+                    priority: 'High',
+                    index: 1,
+                    description: 'Important stuff',
+                },
+                {
+                    title: 'Some task 2',
+                    dueDate: '2024-03-27',
+                    priority: 'Low',
+                    index: 1,
+                    description: 'Very important stuff',
+                },
+            ]
+        
+        }
+        
+    ]
+
+    #listIndex
+
+    //list title input field
+   #listTitleInput = document.querySelector('.new-list');
+
+   _listsContainer = document.getElementById('lists');
+   
+
+   #title;
+
+    _newList (e) {
+        e.preventDefault();
+
+       this.#title = this.#listTitleInput.value;
+
+        //var for new list
+        let nList = new List (this.#title);
+
+        //add new list to lists arr
+        this.lists.push(nList);
+
+        nList.index = this.lists.length - 1;
+
+
+        this.#listIndex = this.lists.length - 1;
+
+        console.log(nList);
+        console.log(this.lists);
+
+
+    }
+
+    _emptyForm () {
+        this.#listTitleInput.value = '';
+    }
+
+    _renderList () {
+         let html = `
+         <li class="list-item" id="active-list" data-index-num='${this.#listIndex}'><button class="list-button">${this.#title}</button></li>
+         `
+
+         this._listsContainer.insertAdjacentHTML('afterbegin', html);
+    }
+
+    _renderAllLists() {
+        for(let list of this.lists) {
+
+        let html = `
+         <li class="list-item" id="active-list" data-index-num='${list.index}'><button class="list-button">${list.title}</button></li>
+         `;
+
+         
+         this._listsContainer.insertAdjacentHTML('beforeend', html)
+        }
+    }
+
+    _eraseAllListsContent() {
+        //container element for lists
+        const listsContainer = document.getElementById('lists');
+        console.log('list container content: ');
+        console.log(listsContainer.innerHTML);
+        listsContainer.innerHTML = '';
+    }
+
+    _setActiveList(e) {
+        console.log('removed attribute:');
+
+        const listItem = document.querySelectorAll('.list-item');
+        for (let i = 0; i <= listButton.length; i++) {
+            listItem[i].removeAttribute('id', 'active-list');
+        }
+
+        console.log('added attribute:');
+
+        const btn = e.target;
+        const element = btn.closest('li.list-item');
+        element.setAttribute('id', 'active-list');
+    }
+
+
+    _setIndex () {
+        for (let list of this.lists) {
+            this.#listIndex = this.lists.indexOf(list);
+            console.log('index in array: ');
+            console.log(this.lists.indexOf(list));
+            console.log('list index: ');
+            console.log(this.#listIndex);
+        }
+
+        console.log('lists arr: ');
+        console.log(this.lists);
+    }
+
+    _setLocalStorage() {
+        localStorage.setItem('lists', JSON.stringify(this.lists));
+    }
+
+        //convert string back into object
+    //and get stored data
+    _getLocalStorage() {
+        const listsData = JSON.parse(localStorage.getItem('lists'));
+
+        if(!listsData) return;
+
+        this.lists = listsData;
+
+        this.lists.forEach(list => {
+            this._renderList(list);
+        })
+    }
+
+    reset(){
+        localStorage.removeItem('lists');
+        location.reload();
+    }
+
+}
